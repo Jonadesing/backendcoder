@@ -22,7 +22,7 @@ app.get('/products', (req, res) => {
 
 
 // Iniciar el servidor en un puerto específico
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Servidor Express corriendo en el puerto ${PORT}`);
 });
