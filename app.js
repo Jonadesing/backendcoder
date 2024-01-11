@@ -3,6 +3,7 @@ const http = require('http');
 const socketIO = require('socket.io');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const mongoose = require('mongoose');  // Agrega Mongoose
 const ProductManager = require('./src/models/ProductManager');
 const CartManager = require('./src/models/CartManager');
 
@@ -13,11 +14,18 @@ const io = socketIO(server);
 app.use(express.json());
 // Configuración de Handlebars como motor de plantillas
 app.engine('.handlebars', exphbs({ extname: '.handlebars' }));
+
 app.set('view engine', '.handlebars');
 app.set('views', path.join(__dirname, 'src/views'));
 
 // Archivos estáticos (CSS, JS, imágenes)
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Conexión a MongoDB usando Mongoose
+mongoose.connect('mongodb+srv://JonaDesigne:Timoteo2020@ecommercecoder.madz2qs.mongodb.net/', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // Inicialización de los managers
 const productManager = new ProductManager('./data/productos.json');
